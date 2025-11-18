@@ -1,53 +1,46 @@
-# wifi-auditor
-📡 Wi-Fi Security & Performance Analyzer (Prototype)
-🔍 Overview
-Wi-Fi Security Analyzer is a Python-based network assessment tool designed to audit wireless networks from the perspective of a connected client ("Internal Auditor").
+# 📡 Wi-Fi Security & Performance Analyzer (Prototype)
 
-Unlike traditional hacking tools that require hardware-dependent Monitor Mode, this tool operates entirely in Managed Mode. It utilizes active scanning, system-level calls, and bandwidth stress-testing to fulfill security availability requirements, detect bottlenecks, and map connected devices.
+### 🔍 Overview
+**Wi-Fi Security Analyzer** is a Python-based network assessment tool designed to audit wireless networks from the perspective of a connected client ("Internal Auditor"). 
 
-This project demonstrates how to perform a Site Survey, Vulnerability Check, and Performance Analysis using standard hardware constraints.
+Unlike traditional hacking tools that require hardware-dependent **Monitor Mode**, this tool operates entirely in **Managed Mode**. It utilizes active scanning, system-level calls, and bandwidth stress-testing to fulfill security availability requirements, detect bottlenecks, and map connected devices.
 
-🚀 Key Features
-Site Survey & Spectrum Analysis: Scans the local environment for visible SSIDs, signal strength (RSSI), and encryption standards to identify channel interference and insecure networks.
+This project demonstrates how to perform a **Site Survey**, **Vulnerability Check**, and **Performance Analysis** using standard hardware constraints.
 
-Active Host Discovery: Performs a multi-threaded IP ping sweep (subnet scan) to identify all live devices connected to the network (IoT, mobile, workstations).
+### 🚀 Key Features
+* **Site Survey & Spectrum Analysis:** Scans the local environment for visible SSIDs, signal strength (RSSI), and encryption standards to identify channel interference and insecure networks.
+* **Active Host Discovery:** Performs a multi-threaded IP ping sweep (subnet scan) to identify all live devices connected to the network (IoT, mobile, workstations).
+* **Performance & Bottleneck Detection:** Integrates `speedtest-cli` to measure real-time latency, upload, and download throughput to identify network degradation.
+* **Automated Reporting:** Generates a timestamped text log (`.txt`) of the audit, suitable for creating Wi-Fi area maps or compliance reports.
+* **Cross-Platform Compatibility:** Detects the OS (Windows/Linux) and adjusts system commands (`netsh` vs `nmcli`) automatically.
 
-Performance & Bottleneck Detection: Integrates speedtest-cli to measure real-time latency, upload, and download throughput to identify network degradation.
+### 🛠️ How It Works
+This tool bypasses the need for raw packet capture (Monitor Mode) by utilizing the **Post-Connection** attack surface:
+1. **Reconnaissance:** Queries the OS network interface to scrape visible BSSID data.
+2. **Enumeration:** Uses the `socket` and `subprocess` libraries to map the `/24` subnet.
+3. **Availability Testing:** Stresses the network connection to ensure it meets availability standards.
 
-Automated Reporting: Generates a timestamped text log (.txt) of the audit, suitable for creating Wi-Fi area maps or compliance reports.
+### 📦 Prerequisites
+* Python 3.x
+* Network connection (Wi-Fi)
 
-Cross-Platform Compatibility: Detects the OS (Windows/Linux) and adjusts system commands (netsh vs nmcli) automatically.
+### ⚙️ Installation & Usage
 
-🛠️ How It Works
-This tool bypasses the need for raw packet capture (Monitor Mode) by utilizing the Post-Connection attack surface:
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/YOUR_USERNAME/wifi-security-analyzer.git](https://github.com/YOUR_USERNAME/wifi-security-analyzer.git)
+   cd wifi-security-analyzer
+   ```
 
-Reconnaissance: Queries the OS network interface to scrape visible BSSID data.
+2. **Install dependencies:**
+   ```bash
+   pip install speedtest-cli colorama
+   ```
 
-Enumeration: Uses the socket and subprocess libraries to map the /24 subnet.
+3. **Run the tool:**
+   ```bash
+   python wifi_auditor.py
+   ```
 
-Availability Testing: Stresses the network connection to ensure it meets availability standards.
-
-📦 Prerequisites
-Python 3.x
-
-Network connection (Wi-Fi)
-
-⚙️ Installation & Usage
-Clone the repository:
-
-Bash
-
-git clone https://github.com/YOUR_USERNAME/wifi-security-analyzer.git
-cd wifi-security-analyzer
-Install dependencies:
-
-Bash
-
-pip install speedtest-cli colorama
-Run the tool:
-
-Bash
-
-python wifi_auditor.py
-⚠️ Disclaimer
-This tool is for educational purposes and authorized network auditing only. Ensure you have permission to scan the network you are connected to.
+### ⚠️ Disclaimer
+*This tool is for educational purposes and authorized network auditing only. Ensure you have permission to scan the network you are connected to.*
